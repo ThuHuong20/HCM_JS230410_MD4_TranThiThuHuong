@@ -1,15 +1,25 @@
 
 import './register.scss'
 import api from "../../services/api";
-import { FormEvent, memo } from 'react'
+import { FormEvent, memo, useState } from 'react'
 //import { useTranslation } from 'react-i18next'
-
+import Loading from '../components/Loading'
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin, message, Modal } from 'antd';
 
 const Register = () => {
   // const { t } = useTranslation();
+  const [load, setLoad] = useState(false);
+  const antIcon = (
+    <LoadingOutlined
+      style={{
+        fontSize: 24,
+      }}
+      spin
+    />
+  );
 
   async function register(event: FormEvent) {
-    console.log("da vao");
 
     event.preventDefault();
     let newUser = {
@@ -18,33 +28,28 @@ const Register = () => {
       password: (event.target as any).password.value,
 
     }
-    let result = await api.userApi.register(newUser);
-
-    console.log("newUser", result)
-    //     try {
-    //       setOnLoad(true);
-    //       let result = await api.users.register(newUser);
-    //       if (result.status != 200) {
-    //         setOnLoad(false);
-    //         Modal.error({
-    //           content: "Email already exists",
-    //         });
-    //         // alert(result.data.message);
-    //       } else {
-    //         setOnLoad(false);
-    //         Modal.confirm({
-    //           content: result.data.message,
-    //           onOk: () => {
-    //             window.location.href = "/login";
-    //           },
-    //         });
-    //         //alert(result.data.message);
-    //       }
-    //     } catch (err) {
-    //       alert("call api that bai");
-    //     }
-    //   }
-    // }
+    setLoad(true)
+    await api.userApi.register(newUser)
+      .then(res => {
+        if (res.status != 200) {
+          Modal.confirm({
+            content: res.data.message,
+            okText: "thử lại"
+          })
+        } else {
+          Modal.success({
+            content: res.data.message,
+            okText: "login"
+          })
+        }
+      })
+      .catch(err => {
+        Modal.success({
+          content: "Sập server!",
+          okText: "thử lại"
+        })
+      })
+    setLoad(false)
   }
   return (
     <div style={{ marginTop: "50px" }} className="container h-100">
@@ -59,7 +64,6 @@ const Register = () => {
                   </p>
                   <form onSubmit={(e) => {
                     register(e)
-                    console.log("da vaon");
 
                   }} className="mx-1 mx-md-4">
                     <div className="d-flex flex-row align-items-center mb-4">
@@ -121,9 +125,16 @@ const Register = () => {
                         <a href="#!"> Terms of service</a>
                       </label>
                     </div>
+
                     <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                      <button type="submit" style={{ backgroundColor: "black", width: "100%" }} className="btn btn-primary btn-lg">
-                        Register
+                      {
+                        load && <Loading />
+                      }
+                      <button type="submit" style={{ backgroundColor: "black", width: "100%", display: "flex", justifyContent: "center" }} className={`${load && 'active'} btn_submit btn btn-primary btn-lg`}>
+                        <p>Register</p>
+                        <div className='btn_loading'>
+                          <Spin indicator={antIcon} />
+                        </div>
                       </button>
                     </div>
                   </form>

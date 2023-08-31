@@ -36,21 +36,21 @@ export default function Navbar() {
                         <a
                             className="item"
                             style={{ color: "black", textDecoration: "none" }}
-                            href="https://www.bulgari.com/en-us/corporate-social-responsibility/supply-chain.html"
+                            href=""
                         >
                             Whole Cakes
                         </a>
                         <a
                             className="item"
                             style={{ color: "black", textDecoration: "none" }}
-                            href="https://www.bulgari.com/en-us/corporate-social-responsibility/supply-chain.html"
+                            href=""
                         >
                             Pre-Sliced Cakes
                         </a>
                         <a
                             className="item"
                             style={{ color: "black", textDecoration: "none" }}
-                            href="https://www.bulgari.com/en-us/corporate-social-responsibility/supply-chain.html"
+                            href=""
                         >
                             CupCakes
                         </a>
