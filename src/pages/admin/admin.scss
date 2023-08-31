@@ -1,0 +1,49 @@
+.container {
+    width: 1024px;
+    height: 600px;
+    margin-top: 60px;
+    border: 1px solid black;
+
+    .container_admin {
+        .container_admin_text {
+            border-bottom: 1px solid black;
+            padding: 10px;
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .container_manager {
+            display: flex;
+
+            >div {
+                &:first-child {
+                    flex: 1;
+                    padding: 20px;
+                    background-color: #f0f0f0;
+
+                    ul {
+                        list-style: none;
+                        padding: 0;
+
+                        li {
+                            padding: 10px 0;
+                            font-weight: bold;
+                            cursor: pointer;
+
+                            &:hover {
+                                color: #ee1f29;
+                            }
+                        }
+                    }
+                }
+
+                &:last-child {
+                    flex: 2;
+                    padding: 20px;
+                    background-color: #ffffff;
+                }
+            }
+        }
+    }
+}

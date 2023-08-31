@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import { commonReducer } from './slices/common.slice';
-
+import { userReducer } from "./slices/user";
 // Kết hợp reducer
 const rootReducer = combineReducers({
     commonStore: commonReducer
@@ -11,7 +11,10 @@ const rootReducer = combineReducers({
 export type StoreType = ReturnType<typeof rootReducer>;
 
 const store = configureStore({
-    reducer: rootReducer
+    reducer: {
+        rootReducer,
+        userStore: userReducer,
+    }
 })
 
 export default store

@@ -1,88 +1,141 @@
+import SearchProduct from '@/pages/searchProduct/SearchProduct';
 import './navbar.scss'
 export default function Navbar() {
     return (
-        <nav className="bg-white border-gray-200 dark:bg-gray-900">
-            <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                <a href="https://flowbite.com/" className="flex items-center">
-                    <img
-                        src="https://flowbite.com/docs/images/logo.svg"
-                        className="h-8 mr-3"
-                        alt="Flowbite Logo"
-                    />
-                    <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-                        Flowbite
-                    </span>
-                </a>
-                <button
-                    data-collapse-toggle="navbar-default"
-                    type="button"
-                    className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                    aria-controls="navbar-default"
-                    aria-expanded="false"
-                >
-                    <span className="sr-only">Open main menu</span>
-                    <svg
-                        className="w-5 h-5"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 17 14"
-                    >
-                        <path
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M1 1h15M1 7h15M1 13h15"
-                        />
-                    </svg>
-                </button>
-                <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-                    <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                        <li>
-                            <a
-                                href="#"
-                                className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
-                                aria-current="page"
-                            >
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="#"
-                                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                            >
-                                About
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="#"
-                                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                            >
-                                Services
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="#"
-                                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                            >
-                                Pricing
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="#"
-                                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                            >
-                                Contact
-                            </a>
-                        </li>
-                    </ul>
+        <div className='nav'>
+            {/* Before Nav */}
+            <div className='before_nav'>
+                <h4>$5 DELIVERY ANYWHERE IN MELBOURNE, MON TO SAT</h4>
+                <i className="fa-solid fa-truck-fast"></i>
+                <h4>ORDER BY 5PM FOR NEXT DAY</h4>
+                <div className='before_nav_icon'>
+                    <a href="https://www.facebook.com/cakerunmelbourne"> <i style={{ marginRight: "15px" }} className="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/cakerunmelbourne"> <i className="fa-brands fa-instagram"></i></a>
                 </div>
             </div>
-        </nav>
+
+            <nav>
+                <div className="nav_content">
+                    <div className="left_content">
+                        <h1
+                            onClick={() => {
+                                window.location.href = "/";
+                            }}
+                        >
+                            <img style={{ height: "50px" }} src="../images/logo.webp" alt="" />
+                        </h1>
+                    </div>
+                    <div className="middle_content">
+                        <a
+                            className="item"
+                            href="/"
+                            style={{ color: "black", textDecoration: "none" }}
+                        >
+                            Home
+                        </a>
+                        <a
+                            className="item"
+                            style={{ color: "black", textDecoration: "none" }}
+                            href="https://www.bulgari.com/en-us/corporate-social-responsibility/supply-chain.html"
+                        >
+                            Whole Cakes
+                        </a>
+                        <a
+                            className="item"
+                            style={{ color: "black", textDecoration: "none" }}
+                            href="https://www.bulgari.com/en-us/corporate-social-responsibility/supply-chain.html"
+                        >
+                            Pre-Sliced Cakes
+                        </a>
+                        <a
+                            className="item"
+                            style={{ color: "black", textDecoration: "none" }}
+                            href="https://www.bulgari.com/en-us/corporate-social-responsibility/supply-chain.html"
+                        >
+                            CupCakes
+                        </a>
+                        <a
+                            className="item"
+                            style={{ color: "black", textDecoration: "none" }}
+                            href="https://cakerun.com.au/about-us/"
+                        >
+                            About
+                        </a>
+                    </div>
+                    <div className="right_content">
+                        {/* Search */}
+                        <div className="searchBox d-flex" role="search">
+                            <div id="search_box">
+                                <SearchProduct />
+                            </div>
+                        </div>
+                        <div className="dropdown">
+                            <a
+                                id="dropdownMenuButton"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                            >
+                                <i className="fa-regular fa-user"> </i>
+                            </a>
+                            <div
+                                className="dropdown-menu"
+                                aria-labelledby="dropdownMenuButton"
+                            >
+                                <a className="dropdown-item" href="/register">
+                                    Register
+                                </a>
+                                <a className="dropdown-item" href="/login">
+                                    Log In
+                                </a>
+                            </div>
+                        </div>
+
+
+                        {/* Cart */}
+                        <div style={{ display: "flex", marginTop: "9px" }}>
+                            <i
+                                onClick={() => {
+                                    window.location.href = "/cart";
+                                }}
+                                className="fa-solid fa-bag-shopping"
+                                style={{ cursor: "pointer" }}
+                            > </i>
+                            <p style={{ color: "red" }}>0</p>
+                        </div>
+                        <div className="dropdown">
+                            <a
+                                id="dropdownMenuButton"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                            >
+                                <i className="fa-solid fa-language"></i>
+                            </a>
+                            <div
+                                className="dropdown-menu"
+                                aria-labelledby="dropdownMenuButton"
+                            >
+                                <a style={{ display: "flex", gap: "10px" }} className="dropdown-item" href="">
+                                    <img style={{ width: "20px", height: "15px", marginTop: "5px" }} src="https://www.countryflags.com/wp-content/uploads/united-states-of-america-flag-png-large.png" alt="" />
+                                    <p>English</p>
+                                </a>
+                                <a style={{ display: "flex", gap: "10px" }} className="dropdown-item" href="">
+                                    <img style={{ width: "20px", height: "15px", marginTop: "5px" }} src="https://cdn.countryflags.com/thumbs/vietnam/flag-400.png" alt="" />
+                                    <p >VietNamese</p>
+                                </a>
+                                <a style={{ display: "flex", gap: "10px" }} className="dropdown-item" href="">
+                                    <img style={{ width: "20px", height: "15px", marginTop: "5px" }} src="https://www.countryflags.com/wp-content/uploads/japan-flag-png-large.png" alt="" />
+                                    <p >Japanese</p>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </nav>
+
+
+        </div>
     )
 }
