@@ -1,6 +1,7 @@
 import './productDetail.scss'
-
+import { useTranslation } from 'react-i18next'
 export default function ProductDetail() {
+  const { t } = useTranslation();
   return (
     <div>
       <div className="detail_container">
@@ -54,86 +55,79 @@ export default function ProductDetail() {
               type="submit"
               className="addToCart"
             >
-              Add To Cart
+              {t('AddToCart')}
             </button>
             <br />
             <div style={{ marginTop: "30px" }} >
-              <h3>Description</h3>
+              <h3>{t('Description')}</h3>
               <div>pppppppppppppppppppppppppppppppppppppp</div>
             </div>
           </div>
         </div>
       </div>
-      <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
-        <img src="../images/D1.png" />
-        <img src="../images/D2.png" />
-        <img src="../images/D3.png" />
-      </div>
       <div className="bulgari_services">
         <div>
           <h1 style={{ textAlign: "center", paddingTop: "30px" }}>
-            EXCLUSIVE CAKERUN SERVICES
+            {t('EXCLUSIVECAKERUNSERVICES')}
           </h1>
         </div>
         <div className="bulgari_services_text">
           <div>
             <h3>
               <img src="../images/car.png" alt="" />
-              Complimentary Shipping
+              {t('ComplimentaryShipping')}
             </h3>
             <p>
-              Shop our exquisite creations now and get free delivery on all
-              orders.
+              {t('Shopour')}
             </p>
             <a
-              href="https://www.bulgari.com/en-us/order-information/deliveryMethods--page__services.html"
+              href="https://cakerun.com.au/what-to-do-birthday-party-must-have-entertainment-for-your-next-function/"
 
             >
-              Discover more
+              {t('Discovermore')}
             </a>
           </div>
           <div>
             <h3>
               <img src="../images/2.png" alt="" />
-              Complimentary Returns & Exchanges
+              {t('Complimentary')}
             </h3>
             <p>
-              We offer free returns and exchanges on all orders placed online.
+              {t('We')}
             </p>
             <a
-              href="https://www.bulgari.com/en-us/order-information/returns&amp;exchanges--page__services.html"
+              href="https://cakerun.com.au/what-to-do-birthday-party-must-have-entertainment-for-your-next-function/"
 
             >
-              Discover more
+              {t('Discovermore')}
             </a>
           </div>
           <div>
             <h3>
               <img src="../images/3.png" alt="" />
-              Pay with Klarna
+              {t('Pay')}
             </h3>
-            <p>Shop now and pay in 4 interest-free installments with Klarna.</p>
+            <p>{t('Shopnow')}</p>
             <a
-              href="https://www.bulgari.com/en-us/order-information/klarna-page-services.html"
+              href="https://cakerun.com.au/what-to-do-birthday-party-must-have-entertainment-for-your-next-function/"
 
             >
-              Discover more
+              {t('Discovermore')}
             </a>
           </div>
           <div>
             <h3>
               <img src="../images/4.png" alt="" />
-              Client Advisor
+              {t('ClientAdvisor')}
             </h3>
             <p>
-              The perfect advice is always at hand with our customer care
-              service.
+              {t('The')}
             </p>
             <a
-              href="https://www.bulgari.com/en-us/contact-us/contact-us--page__services.html"
+              href="https://cakerun.com.au/what-to-do-birthday-party-must-have-entertainment-for-your-next-function/"
 
             >
-              Discover more
+              {t('Discovermore')}
             </a>
           </div>
         </div>

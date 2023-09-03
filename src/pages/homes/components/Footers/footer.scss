@@ -1,3 +1,111 @@
 .footer {
     margin-top: 100px;
+
+    .footer_logo {
+        text-align: center;
+        display: flex;
+        align-items: center;
+
+        p {
+            font-weight: bold;
+            flex: 1;
+            color: red;
+            margin: 0;
+        }
+
+        img {
+            max-width: 250px;
+            /* Điều chỉnh chiều rộng tối đa của logo */
+        }
+    }
+
+    .footer_cake {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        margin-top: 20px;
+        font-size: 25px;
+        cursor: pointer;
+    }
+
+    .footer_input {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 15px;
+
+        input[type="email"] {
+            background-color: rgb(227, 227, 227);
+            width: 700px;
+            padding: 10px;
+            border-radius: 4px;
+            margin-right: 10px;
+
+            // flex: 1;
+        }
+
+        button {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+
+            &:hover {
+                background: #4ae217;
+            }
+        }
+    }
+
+    .footer_follow {
+        display: flex;
+        gap: 100px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+
+        .footer_follow_text {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+
+            a {
+                text-decoration: none;
+                color: #000;
+                margin: 5px;
+                cursor: pointer;
+            }
+        }
+
+        .footer_follow_pay {
+            margin: 10px 0;
+
+            img {
+                max-width: 200px;
+                /* Điều chỉnh kích thước của biểu tượng thanh toán */
+            }
+
+            a {
+                text-decoration: none;
+                color: #000;
+                margin: 0 5px;
+
+                i {
+                    font-size: 30px;
+                }
+            }
+        }
+    }
+
+    .footer_design {
+        background-color: rgb(227, 227, 227);
+        text-align: center;
+        padding: 10px 0;
+
+        p {
+            margin: 0;
+        }
+    }
 }

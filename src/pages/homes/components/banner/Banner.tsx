@@ -1,6 +1,7 @@
 import './banner.scss'
-
+import { useTranslation } from 'react-i18next'
 export default function Banner() {
+    const { t } = useTranslation();
     return (
         <div
             id="carouselExampleIndicators"
@@ -20,25 +21,25 @@ export default function Banner() {
                 <div className="carousel-item active">
                     <img className="d-block w-100" src="../images/banner1.webp" alt="First slide" />
                     <div className="carousel-caption">
-                        <h1>CAKES FOR DELIVERY MELBOURNE</h1>
-                        <p>$5 DELIVERY TO ALL MELBOURNE METRO AREAS</p>
-                        <button>ORDER NOW</button>
+                        <h1>{t('CAKESFORDELIVERYMELBOURNE')}</h1>
+                        <p>{t('$5DELIVERYTOALLMELBOURNEMETROAREAS')}</p>
+                        <button>{t('ORDERNOW')}</button>
                     </div>
                 </div>
                 <div className="carousel-item">
                     <img className="d-block w-100" src="../images/banner3.webp" alt="Second slide" />
                     <div className="carousel-caption">
-                        <h1>CAKES FOR DELIVERY MELBOURNE</h1>
-                        <p>$5 DELIVERY TO ALL MELBOURNE METRO AREAS</p>
-                        <button>ORDER NOW</button>
+                        <h1>{t('CAKESFORDELIVERYMELBOURNE')}</h1>
+                        <p>{t('$5DELIVERYTOALLMELBOURNEMETROAREAS')}</p>
+                        <button>{t('ORDERNOW')}</button>
                     </div>
                 </div>
                 <div className="carousel-item">
                     <img className="d-block w-100" src="../images/banner2.webp" alt="Third slide" />
                     <div className="carousel-caption">
-                        <h1>CAKES FOR DELIVERY MELBOURNE</h1>
-                        <p>$5 DELIVERY TO ALL MELBOURNE METRO AREAS</p>
-                        <button>ORDER NOW</button>
+                        <h1>{t('CAKESFORDELIVERYMELBOURNE')}</h1>
+                        <p>{t('$5DELIVERYTOALLMELBOURNEMETROAREAS')}</p>
+                        <button>{t('ORDERNOW')}</button>
                     </div>
                 </div>
             </div>

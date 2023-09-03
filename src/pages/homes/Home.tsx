@@ -10,9 +10,7 @@ export default function Home() {
         <div className='content_body'>
           <Outlet />
         </div>
-
         <Footer />
-
       </div>
     </div>
   )

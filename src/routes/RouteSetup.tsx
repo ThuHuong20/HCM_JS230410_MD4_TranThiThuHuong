@@ -27,8 +27,8 @@ export default function RouteSetup() {
           <Route path="/login" element={Lazy(() => import("@pages/login/Login"))()}> </Route>
           <Route path="/register" element={Lazy(() => import("@/pages/register/Register"))()}></Route>
           <Route path="/cart" element={<Cart />}></Route>
+          {/* <Route path=":id" element={Lazy(() => import("@pages/products/productDetails/ProductDetail"))()}></Route> */}
           {RouteProduct}
-          {/* {RouteAuthen} */}
         </Route>
         {RouteAdmin}
       </Routes>

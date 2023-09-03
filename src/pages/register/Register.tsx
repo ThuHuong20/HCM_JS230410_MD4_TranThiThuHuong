@@ -2,13 +2,13 @@
 import './register.scss'
 import api from "../../services/api";
 import { FormEvent, memo, useState } from 'react'
-//import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import Loading from '../components/Loading'
 import { LoadingOutlined } from '@ant-design/icons';
-import { Spin, message, Modal } from 'antd';
+import { Spin, Modal } from 'antd';
 
 const Register = () => {
-  // const { t } = useTranslation();
+  const { t } = useTranslation();
   const [load, setLoad] = useState(false);
   const antIcon = (
     <LoadingOutlined
@@ -34,19 +34,22 @@ const Register = () => {
         if (res.status != 200) {
           Modal.confirm({
             content: res.data.message,
-            okText: "thử lại"
+            okText: "Retry"
           })
         } else {
           Modal.success({
             content: res.data.message,
-            okText: "login"
+            okText: "login",
+            onOk: () => {
+              window.location.href = "/login";
+            },
           })
         }
       })
       .catch(err => {
         Modal.success({
           content: "Sập server!",
-          okText: "thử lại"
+          okText: "Retry"
         })
       })
     setLoad(false)
@@ -60,7 +63,7 @@ const Register = () => {
               <div className="row justify-content-center">
                 <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                   <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
-                    Sign up
+                    {t('Signup')}
                   </p>
                   <form onSubmit={(e) => {
                     register(e)
@@ -73,7 +76,7 @@ const Register = () => {
                           type="text"
                           id="form3Example1c"
                           className="form-control"
-                          placeholder=' Your Name'
+                          placeholder={t('YourName')}
                           name="userName"
                         />
                       </div>
@@ -86,7 +89,7 @@ const Register = () => {
                           type="email"
                           id="form3Example3c"
                           className="form-control"
-                          placeholder=' Your Email'
+                          placeholder={t('YourEmail')}
                         />
                       </div>
                     </div>
@@ -98,7 +101,7 @@ const Register = () => {
                           type="password"
                           id="form3Example4c"
                           className="form-control"
-                          placeholder=' Password'
+                          placeholder={t('password')}
                         />
                       </div>
                     </div>
@@ -109,7 +112,7 @@ const Register = () => {
                           type="password"
                           id="form3Example4cd"
                           className="form-control"
-                          placeholder='Repeat your password'
+                          placeholder={t('repeat')}
                         />
                       </div>
                     </div>
@@ -121,8 +124,7 @@ const Register = () => {
                         id="form2Example3c"
                       />
                       <label className="form-check-label" htmlFor="form2Example3">
-                        I agree all statements in
-                        <a href="#!"> Terms of service</a>
+                        {t('agree')}
                       </label>
                     </div>
 
@@ -131,7 +133,7 @@ const Register = () => {
                         load && <Loading />
                       }
                       <button type="submit" style={{ backgroundColor: "black", width: "100%", display: "flex", justifyContent: "center" }} className={`${load && 'active'} btn_submit btn btn-primary btn-lg`}>
-                        <p>Register</p>
+                        <p>{t('register')}</p>
                         <div className='btn_loading'>
                           <Spin indicator={antIcon} />
                         </div>

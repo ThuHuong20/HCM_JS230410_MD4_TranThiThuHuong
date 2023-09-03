@@ -1,13 +1,21 @@
 import SearchProduct from '@/pages/searchProduct/SearchProduct';
 import './navbar.scss'
+import { Modal } from "antd";
+import { useTranslation } from 'react-i18next'
+//import i18n from '@/i18n/config';
 export default function Navbar() {
+    function changeLanguage(lang: string) {
+        localStorage.setItem("locales", lang);
+        window.location.reload();
+    }
+    const { t, i18n } = useTranslation();
     return (
         <div className='nav'>
             {/* Before Nav */}
             <div className='before_nav'>
-                <h4>$5 DELIVERY ANYWHERE IN MELBOURNE, MON TO SAT</h4>
+                <h4>{t('$5DELIVERYANYWHEREINMELBOURNEMONTOSAT')}</h4>
                 <i className="fa-solid fa-truck-fast"></i>
-                <h4>ORDER BY 5PM FOR NEXT DAY</h4>
+                <h4>{t('ORDERBY5PMFORNEXTDAY')}</h4>
                 <div className='before_nav_icon'>
                     <a href="https://www.facebook.com/cakerunmelbourne"> <i style={{ marginRight: "15px" }} className="fa-brands fa-facebook-f"></i></a>
                     <a href="https://www.instagram.com/cakerunmelbourne"> <i className="fa-brands fa-instagram"></i></a>
@@ -31,35 +39,35 @@ export default function Navbar() {
                             href="/"
                             style={{ color: "black", textDecoration: "none" }}
                         >
-                            Home
+                            {t('Home')}
                         </a>
                         <a
                             className="item"
                             style={{ color: "black", textDecoration: "none" }}
                             href=""
                         >
-                            Whole Cakes
+                            {t('WholeCakes')}
                         </a>
                         <a
                             className="item"
                             style={{ color: "black", textDecoration: "none" }}
                             href=""
                         >
-                            Pre-Sliced Cakes
+                            {t('PreSlicedCakes')}
                         </a>
                         <a
                             className="item"
                             style={{ color: "black", textDecoration: "none" }}
                             href=""
                         >
-                            CupCakes
+                            {t('CupCakes')}
                         </a>
                         <a
                             className="item"
                             style={{ color: "black", textDecoration: "none" }}
                             href="https://cakerun.com.au/about-us/"
                         >
-                            About
+                            {t('About')}
                         </a>
                     </div>
                     <div className="right_content">
@@ -69,29 +77,72 @@ export default function Navbar() {
                                 <SearchProduct />
                             </div>
                         </div>
-                        <div className="dropdown">
-                            <a
-                                id="dropdownMenuButton"
-                                data-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                            >
-                                <i className="fa-regular fa-user"> </i>
-                            </a>
-                            <div
-                                className="dropdown-menu"
-                                aria-labelledby="dropdownMenuButton"
-                            >
-                                <a className="dropdown-item" href="/register">
-                                    Register
+                        {localStorage.getItem("token") ? (
+                            <div className="dropdown">
+                                <a
+                                    id="dropdownMenuButton"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                >
+                                    <span
+                                        style={{
+                                            cursor: "pointer",
+                                        }}
+                                        className="brand_name"
+                                    >
+                                        <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                                    </span>
                                 </a>
-                                <a className="dropdown-item" href="/login">
-                                    Log In
-                                </a>
+                                <div
+                                    className="dropdown-menu"
+                                    aria-labelledby="dropdownMenuButton"
+                                >
+                                    <a className="dropdown-item" href="/profile">
+                                        {t('Profile')}
+                                    </a>
+                                    <a
+                                        //href="/"
+                                        style={{ cursor: "pointer" }}
+                                        className="dropdown-item"
+                                        onClick={() => {
+                                            //alert("Are you sure want to logout?");
+                                            Modal.confirm({
+                                                content: "Are you sure want to logout?",
+                                                onOk: () => {
+                                                    window.location.href = "/";
+                                                },
+                                            });
+                                            localStorage.removeItem("token");
+                                        }}
+                                    >
+                                        {t('logout')}
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-
-
+                        ) : (
+                            <div className="dropdown">
+                                <a
+                                    id="dropdownMenuButton"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                >
+                                    <i className="fa-regular fa-user"> </i>
+                                </a>
+                                <div
+                                    className="dropdown-menu"
+                                    aria-labelledby="dropdownMenuButton"
+                                >
+                                    <a className="dropdown-item" href="/register">
+                                        {t('register')}
+                                    </a>
+                                    <a className="dropdown-item" href="/login">
+                                        {t('login')}
+                                    </a>
+                                </div>
+                            </div>
+                        )}
                         {/* Cart */}
                         <div style={{ display: "flex", marginTop: "9px" }}>
                             <i
@@ -110,7 +161,12 @@ export default function Navbar() {
                                 aria-haspopup="true"
                                 aria-expanded="false"
                             >
-                                <i className="fa-solid fa-language"></i>
+                                <a style={{ display: "flex", gap: "10px" }} className="dropdown-item" href="">
+                                    {i18n.language === 'en' && <img style={{ width: "20px", height: "15px", marginTop: "5px" }} src="https://www.countryflags.com/wp-content/uploads/united-states-of-america-flag-png-large.png" alt="" />}
+                                    {i18n.language === 'vi' && <img style={{ width: "20px", height: "15px", marginTop: "5px" }} src="https://cdn.countryflags.com/thumbs/vietnam/flag-400.png" alt="" />}
+                                    {i18n.language === 'ja' && <img style={{ width: "20px", height: "15px", marginTop: "5px" }} src="https://www.countryflags.com/wp-content/uploads/japan-flag-png-large.png" alt="" />}
+                                </a>
+
                             </a>
                             <div
                                 className="dropdown-menu"
@@ -118,24 +174,27 @@ export default function Navbar() {
                             >
                                 <a style={{ display: "flex", gap: "10px" }} className="dropdown-item" href="">
                                     <img style={{ width: "20px", height: "15px", marginTop: "5px" }} src="https://www.countryflags.com/wp-content/uploads/united-states-of-america-flag-png-large.png" alt="" />
-                                    <p>English</p>
+                                    <p onClick={() => {
+                                        changeLanguage('en')
+                                    }}> {t('eng')}</p>
                                 </a>
                                 <a style={{ display: "flex", gap: "10px" }} className="dropdown-item" href="">
                                     <img style={{ width: "20px", height: "15px", marginTop: "5px" }} src="https://cdn.countryflags.com/thumbs/vietnam/flag-400.png" alt="" />
-                                    <p >VietNamese</p>
+                                    <p onClick={() => {
+                                        changeLanguage('vi')
+                                    }}> {t('vi')}</p>
                                 </a>
                                 <a style={{ display: "flex", gap: "10px" }} className="dropdown-item" href="">
                                     <img style={{ width: "20px", height: "15px", marginTop: "5px" }} src="https://www.countryflags.com/wp-content/uploads/japan-flag-png-large.png" alt="" />
-                                    <p >Japanese</p>
+                                    <p onClick={() => {
+                                        changeLanguage('ja')
+                                    }}>{t('ja')}</p>
                                 </a>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </nav>
-
-
         </div>
     )
 }

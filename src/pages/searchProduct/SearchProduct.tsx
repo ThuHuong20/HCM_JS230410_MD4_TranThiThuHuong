@@ -2,7 +2,7 @@ import './searchProduct.scss'
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-
+import { useTranslation } from 'react-i18next'
 // Define a union type for the allowed placement values
 type OffcanvasPlacement = 'top' | 'bottom' | 'start' | 'end';
 
@@ -16,15 +16,15 @@ function OffCanvasExample({ placement }: OffCanvasExampleProps) {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
+    const { t } = useTranslation();
     return (
         <>
             <Button onClick={handleShow} className="input">
-                <input style={{ padding: "5px", borderRadius: "10px", border: "1px solid black" }} type="text" placeholder='Search' />
+                <input style={{ padding: "5px", borderRadius: "10px", border: "1px solid black" }} type="text" placeholder={t('search')} />
             </Button>
             <Offcanvas show={show} onHide={handleClose} placement={placement}>
                 <Offcanvas.Header style={{ display: "flex", justifyContent: "center", gap: "30px" }} closeButton>
-                    <Offcanvas.Title> <input style={{ width: '400px', padding: "5px 10px", border: "1px solid black", borderRadius: "5px", height: "40px", marginTop: "5px" }} type="text" placeholder='Search...' /> </Offcanvas.Title>
+                    <Offcanvas.Title> <input style={{ width: '400px', padding: "5px 10px", border: "1px solid black", borderRadius: "5px", height: "40px", marginTop: "5px" }} type="text" placeholder={t('search')} /> </Offcanvas.Title>
                     <Button variant="outline-secondary" onClick={handleClose} className='close-button'>
                         <i className="fa-solid fa-xmark"></i>
                     </Button>

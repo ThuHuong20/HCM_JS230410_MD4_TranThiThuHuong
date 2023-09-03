@@ -1,6 +1,60 @@
 import './login.scss'
+import { FormEvent, memo, useState } from 'react'
+import api from "../../services/api";
+import Loading from '../components/Loading'
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin, Modal } from 'antd';
+import { useTranslation } from 'react-i18next'
+const Login = () => {
+  const { t } = useTranslation();
 
-export default function Login() {
+  const [load, setLoad] = useState(false);
+  const antIcon = (
+    <LoadingOutlined
+      style={{
+        fontSize: 24,
+      }}
+      spin
+    />
+  );
+  async function login(event: FormEvent) {
+    event.preventDefault();
+    if (load) return
+
+    let data = {
+      userName: (event.target as any).userName.value,
+      password: (event.target as any).password.value,
+    }
+
+    setLoad(true)
+
+    await api.userApi.login(data)
+      .then(res => {
+        if (res.status != 200) {
+          Modal.confirm({
+            content: res.data.message,
+            okText: "Retry"
+          })
+        } else {
+          Modal.success({
+            content: res.data.message,
+            okText: "ok",
+            onOk: () => {
+              localStorage.setItem("token", res.data.token)
+              window.location.href = '/'
+            }
+          })
+        }
+      })
+      .catch(_err => {
+        Modal.confirm({
+          content: "Sập server!",
+          okText: "Retry"
+        })
+      })
+
+    setLoad(false)
+  }
   return (
 
     <div className="container py-5 h-100">
@@ -18,13 +72,11 @@ export default function Login() {
               </div>
               <div className="col-md-6 col-lg-7 d-flex align-items-center">
                 <div className="card-body p-4 p-lg-5 text-black">
-                  <form>
+                  <form onSubmit={(e) => {
+                    login(e)
+                  }}>
                     <div className="d-flex align-items-center mb-3 pb-1">
                       <img style={{ width: "80px" }} src="https://icon-library.com/images/cake-icon/cake-icon-9.jpg" alt="" />
-                      {/* <i
-                        className="fas fa-cubes fa-2x me-3"
-                        style={{ color: "#ff6219" }}
-                      /> */}
                       <span className="h1 fw-bold mb-0">
                         <img style={{ width: "120px", marginLeft: "20px" }} src="../images/logo.webp" alt="" />
                       </span>
@@ -33,40 +85,48 @@ export default function Login() {
                       className="fw-normal mb-3 pb-3"
                       style={{ letterSpacing: 1 }}
                     >
-                      Sign into your account
+                      {t('Signintoyouraccount')}
                     </h5>
                     <div className="form-outline mb-4">
                       <input
-                        type="email"
+                        name='userName'
                         id="form2Example17"
                         className="form-control form-control-lg"
-                        placeholder=' Email address'
+                        placeholder={t('emailAddress')}
                       />
                     </div>
                     <div className="form-outline mb-4">
                       <input
+                        name="password"
                         type="password"
                         id="form2Example27"
                         className="form-control form-control-lg"
-                        placeholder=' Password'
+                        placeholder={t('password')}
                       />
 
                     </div>
                     <div className="pt-1 mb-4">
-                      <button style={{ color: "white", backgroundColor: "black" }}
-                        className="btn btn-sucsess btn-lg btn-block"
-                        type="button"
+                      {
+                        load && <Loading />
+                      }
+                      <button style={{ color: "white", backgroundColor: "black", display: "flex", justifyContent: "center" }}
+                        className={`${load && 'active'} btn_submit btn btn-sucsess btn-lg btn-block`}
+                        type="submit"
                       >
-                        Login
+                        <p> {t('login')}</p>
+                        <div className='btn_loading'>
+                          <Spin indicator={antIcon} />
+                        </div>
                       </button>
+
                     </div>
                     <a className="small text-muted" href="#!">
-                      Forgot password?
+                      {t('forgotPassword')}
                     </a>
                     <p className="mb-5 pb-lg-2" style={{ color: "#393f81" }}>
-                      Don't have an account?{" "}
+                      {t('doneacount')}
                       <a href="#!" style={{ color: "#393f81" }}>
-                        Register here
+                        {t('here')}
                       </a>
                     </p>
 
@@ -82,4 +142,5 @@ export default function Login() {
 
   )
 }
+export default memo(Login)
 
