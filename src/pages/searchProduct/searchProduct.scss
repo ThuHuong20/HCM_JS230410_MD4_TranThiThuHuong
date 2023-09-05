@@ -16,16 +16,18 @@
 }
 
 .product {
-    border: 1px solid #ccc;
+    display: flex;
+    // border: 1px solid #ccc;
     padding: 20px;
-    width: calc(20% - 20px); // Sắp xếp 4 cột trên một hàng
-    box-sizing: border-box;
-    background-color: #fff;
-    -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.3);
-    box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.3);
+    width: 700px;
+    // width: calc(20% - 20px); // Sắp xếp 4 cột trên một hàng
+    // box-sizing: border-box;
+    // background-color: #fff;
+    // -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.3);
+    // box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.3);
 
     img {
-        width: 400px;
+        width: 250px;
         height: 200px;
         margin-bottom: 10px;
         transition: transform 0.3s;
@@ -36,6 +38,9 @@
     }
 
     .product_text {
+        margin-left: 40px;
+        margin-top: 40px;
+
         h3 {
             font-size: 1.2rem;
             margin: 0 0 10px;

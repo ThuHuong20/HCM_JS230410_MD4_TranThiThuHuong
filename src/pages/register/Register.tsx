@@ -20,40 +20,65 @@ const Register = () => {
   );
 
   async function register(event: FormEvent) {
-
     event.preventDefault();
-    let newUser = {
-      email: (event.target as any).email.value,
-      userName: (event.target as any).userName.value,
-      password: (event.target as any).password.value,
 
+    const email = (event.target as any).email.value;
+    const userName = (event.target as any).userName.value;
+    const password = (event.target as any).password.value;
+
+    // Kiểm tra xem tất cả các trường đã được điền đầy đủ
+    if (!email || !userName || !password) {
+      Modal.error({
+        content: t('err1'),
+        okText: t('try'),
+      });
+      return;
     }
-    setLoad(true)
-    await api.userApi.register(newUser)
-      .then(res => {
-        if (res.status != 200) {
-          Modal.confirm({
-            content: res.data.message,
-            okText: "Retry"
-          })
-        } else {
-          Modal.success({
-            content: res.data.message,
-            okText: "login",
-            onOk: () => {
-              window.location.href = "/login";
-            },
-          })
-        }
-      })
-      .catch(err => {
+
+    // Kiểm tra độ dài của mật khẩu
+    if (password.length < 6) {
+      Modal.error({
+        content: t('err2'),
+        okText: t('try'),
+      });
+      return;
+    }
+
+    setLoad(true);
+
+    try {
+      const newUser = {
+        email,
+        userName,
+        password,
+      };
+
+      const res = await api.userApi.register(newUser);
+
+      if (res.status !== 200) {
+        Modal.confirm({
+          content: res.data.message,
+          okText: t('try'),
+        });
+      } else {
         Modal.success({
-          content: "Sập server!",
-          okText: "Retry"
-        })
-      })
-    setLoad(false)
+          content: res.data.message,
+          okText: 'login',
+          onOk: () => {
+            window.location.href = '/login';
+          },
+        });
+      }
+    } catch (error) {
+      Modal.error({
+        content: 'Sập server!',
+        okText: t('try'),
+      });
+    }
+
+    setLoad(false);
   }
+
   return (
     <div style={{ marginTop: "50px" }} className="container h-100">
       <div className="row d-flex justify-content-center align-items-center h-100">

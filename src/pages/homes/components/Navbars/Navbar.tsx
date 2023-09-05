@@ -3,12 +3,16 @@ import './navbar.scss'
 import { Modal } from "antd";
 import { useTranslation } from 'react-i18next'
 //import i18n from '@/i18n/config';
+
+
 export default function Navbar() {
     function changeLanguage(lang: string) {
         localStorage.setItem("locales", lang);
         window.location.reload();
     }
     const { t, i18n } = useTranslation();
+
+
     return (
         <div className='nav'>
             {/* Before Nav */}
@@ -16,9 +20,10 @@ export default function Navbar() {
                 <h4>{t('$5DELIVERYANYWHEREINMELBOURNEMONTOSAT')}</h4>
                 <i className="fa-solid fa-truck-fast"></i>
                 <h4>{t('ORDERBY5PMFORNEXTDAY')}</h4>
-                <div className='before_nav_icon'>
+                <div style={{ display: "flex" }} className='before_nav_icon'>
                     <a href="https://www.facebook.com/cakerunmelbourne"> <i style={{ marginRight: "15px" }} className="fa-brands fa-facebook-f"></i></a>
                     <a href="https://www.instagram.com/cakerunmelbourne"> <i className="fa-brands fa-instagram"></i></a>
+                    <p style={{ color: "white", marginLeft: "15px" }}>Hi</p>
                 </div>
             </div>
 
@@ -108,7 +113,7 @@ export default function Navbar() {
                                         onClick={() => {
                                             //alert("Are you sure want to logout?");
                                             Modal.confirm({
-                                                content: "Are you sure want to logout?",
+                                                content: t('confirmLogout'),
                                                 onOk: () => {
                                                     window.location.href = "/";
                                                 },

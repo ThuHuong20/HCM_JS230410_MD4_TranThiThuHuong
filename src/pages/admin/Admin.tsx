@@ -1,7 +1,8 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import './admin.scss'
 
 export default function Admin() {
+    const navigate = useNavigate();
     return (
         <div className='container'>
             <div className='container_admin'>
@@ -9,14 +10,17 @@ export default function Admin() {
                     <h1>Admin</h1>
                 </div>
                 <div className='container_manager'>
-                    <div>
+                    <div className='container_manager_detail'>
                         <ul>
-                            <li>Product Manager</li>
-                            <li>User Manager</li>
+                            <li onClick={() => {
+                                navigate("productManager");
+                            }}>Products</li>
+                            <li onClick={() => {
+                                navigate("userManager");
+                            }}>Customers</li>
                         </ul>
                     </div>
                     <div>
-                        content
                         <Outlet></Outlet>
                     </div>
                 </div>

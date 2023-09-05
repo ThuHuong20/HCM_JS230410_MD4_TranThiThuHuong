@@ -12,9 +12,7 @@ const rootReducer = combineReducers({
 export type StoreType = ReturnType<typeof rootReducer>;
 
 const store = configureStore({
-    reducer: {
-        reducer: rootReducer
-    }
+    reducer: rootReducer
 })
 
 export default store

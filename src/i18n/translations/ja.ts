@@ -12,6 +12,7 @@ const data: I18nType = {
     ORDERBY5PMFORNEXTDAY: "翌日の配達のために5時までに注文",
     Profile: "プロフィール",
     logout: "ログアウト",
+    confirmLogout: "ログアウトしますか？",
     eng: "英語",
     vi: "ベトナム語",
     ja: "日本語",
@@ -65,6 +66,9 @@ const data: I18nType = {
     repeat: "パスワードを再入力",
     agree: "利用規約のすべての声明に同意します",
     register: "登録",
+    err1: "すべてのフィールドを完全に入力してください。",
+    err2: "パスワードは少なくとも6文字必要です。",
+
     /* Product detail */
     EXCLUSIVECAKERUNSERVICES: "エクスクルーシブケーキランサービス",
     ComplimentaryShipping: "無料配送",

@@ -11,6 +11,7 @@ const data = {
     ORDERBY5PMFORNEXTDAY: "ORDER BY 5PM FOR NEXT DAY",
     Profile: "Profile",
     logout: "Log 0ut",
+    confirmLogout: "Are you sure want to logout?",
     eng: "English",
     vi: "VietNamese",
     ja: "Japanese",
@@ -64,6 +65,8 @@ const data = {
     repeat: "Repeat your password",
     agree: "I agree all statements in Terms of service",
     register: "Register",
+    err1: "Please fill out all fields completely.",
+    err2: "Passwords must be at least 6 characters.",
     /* Product detail */
     EXCLUSIVECAKERUNSERVICES: "EXCLUSIVE CAKERUN SERVICES",
     ComplimentaryShipping: "Complimentary Shipping",

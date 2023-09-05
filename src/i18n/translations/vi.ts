@@ -12,6 +12,7 @@ const data: I18nType = {
     ORDERBY5PMFORNEXTDAY: "Đặt hàng trước 5 giờ chiều để nhận vào ngày hôm sau",
     Profile: "Hồ sơ",
     logout: "Đăng xuất",
+    confirmLogout: "Bạn có muốn đắng xuất không?",
     eng: "Tiếng Anh",
     vi: "Tiếng Việt",
     ja: "Tiếng Nhật",
@@ -65,6 +66,8 @@ const data: I18nType = {
     repeat: "Lặp lại mật khẩu của bạn",
     agree: "Tôi đồng ý với tất cả các điều khoản trong Điều khoản dịch vụ",
     register: "Đăng ký",
+    err1: "Vui lòng điền đầy đủ tất cả các trường.",
+    err2: "Mật khẩu phải có ít nhất 6 ký tự.",
     /* Product detail */
     EXCLUSIVECAKERUNSERVICES: "DỊCH VỤ CAKERUN ĐỘC QUYỀN",
     ComplimentaryShipping: "Giao hàng miễn phí",

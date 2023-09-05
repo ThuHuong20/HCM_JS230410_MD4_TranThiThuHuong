@@ -17,43 +17,59 @@ const Login = () => {
       spin
     />
   );
+
   async function login(event: FormEvent) {
     event.preventDefault();
-    if (load) return
+    if (load) return;
 
-    let data = {
-      userName: (event.target as any).userName.value,
-      password: (event.target as any).password.value,
+    const userName = (event.target as any).userName.value;
+    const password = (event.target as any).password.value;
+
+    // Kiểm tra xem tên người dùng và mật khẩu đã được điền và không để trống
+    if (!userName || !password) {
+      Modal.error({
+        content: t('err1'),
+        okText: t('try'),
+      });
+      return;
     }
 
-    setLoad(true)
+    setLoad(true);
 
-    await api.userApi.login(data)
-      .then(res => {
-        if (res.status != 200) {
-          Modal.confirm({
-            content: res.data.message,
-            okText: "Retry"
-          })
-        } else {
-          Modal.success({
-            content: res.data.message,
-            okText: "ok",
-            onOk: () => {
-              localStorage.setItem("token", res.data.token)
-              window.location.href = '/'
-            }
-          })
-        }
-      })
-      .catch(_err => {
+    try {
+      const data = {
+        userName,
+        password,
+      };
+
+      const res = await api.userApi.login(data);
+
+      if (res.status !== 200) {
+        console.log("res", res);
         Modal.confirm({
-          content: "Sập server!",
-          okText: "Retry"
-        })
-      })
+          content: res.data.message,
+          okText: t('try'),
+        });
+      } else {
+        localStorage.setItem("token", res.data.token);
+        window.location.href = '/';
+        // Modal.success({
+        //   content: res.data.message,
+        //   okText: 'ok',
+        //   onOk: () => {
+        //     localStorage.setItem("token", res.data.token);
+        //     window.location.href = '/';
+        //   },
+        // });
+      }
+    } catch (_err) {
+      Modal.confirm({
+        content: "Sập server!",
+        okText: "Retry",
+      });
+    }
 
-    setLoad(false)
+    setLoad(false);
   }
   return (
 
@@ -125,7 +141,7 @@ const Login = () => {
                     </a>
                     <p className="mb-5 pb-lg-2" style={{ color: "#393f81" }}>
                       {t('doneacount')}
-                      <a href="#!" style={{ color: "#393f81" }}>
+                      <a href="/register" style={{ color: "#393f81" }}>
                         {t('here')}
                       </a>
                     </p>
