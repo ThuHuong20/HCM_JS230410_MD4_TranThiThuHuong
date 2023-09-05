@@ -111,9 +111,7 @@ export default function Product() {
           <p>$78.00</p>
           <button>View Product</button>
         </div>
-
       </div>
-      <Outlet />
     </div>
   )
 }
