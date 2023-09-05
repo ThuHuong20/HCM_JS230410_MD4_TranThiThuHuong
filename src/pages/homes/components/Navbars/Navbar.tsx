@@ -4,7 +4,11 @@ import { Modal } from "antd";
 import { useTranslation } from 'react-i18next'
 //import i18n from '@/i18n/config';
 
-
+import { useSelector, useDispatch } from 'react-redux';
+import { StoreType } from '../../../../stores'
+import api from '../../../../services/api'
+import { useEffect } from 'react';
+import { userAction } from '../../../../stores/slices/user';
 export default function Navbar() {
     function changeLanguage(lang: string) {
         localStorage.setItem("locales", lang);
@@ -12,7 +16,23 @@ export default function Navbar() {
     }
     const { t, i18n } = useTranslation();
 
+    const dispatch = useDispatch();
+    const store = useSelector(store => store) as StoreType;
 
+
+    useEffect(() => {
+        if (localStorage.getItem("token")) {
+            api.userApi.authentication()
+                .then(res => {
+                    console.log("res da vao 2", res)
+                    if (res.status == 200) {
+                        dispatch(userAction.setLoginData(res.data.data))
+                    } else {
+                        localStorage.removeItem("token")
+                    }
+                })
+        }
+    }, [])
     return (
         <div className='nav'>
             {/* Before Nav */}
@@ -23,7 +43,7 @@ export default function Navbar() {
                 <div style={{ display: "flex" }} className='before_nav_icon'>
                     <a href="https://www.facebook.com/cakerunmelbourne"> <i style={{ marginRight: "15px" }} className="fa-brands fa-facebook-f"></i></a>
                     <a href="https://www.instagram.com/cakerunmelbourne"> <i className="fa-brands fa-instagram"></i></a>
-                    <p style={{ color: "white", marginLeft: "15px" }}>Hi</p>
+                    {localStorage.getItem("token") ? <p style={{ color: "white", marginLeft: "15px" }}>Hi {store.userStore.data?.userName}</p> : <></>}
                 </div>
             </div>
 
