@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, MutableRefObject, FormEvent } from 'react'
 import api from '@/services/api';
 import './ProductManager.scss'
 import { Modal } from 'antd';
@@ -14,8 +14,7 @@ interface Picture {
 }
 
 export default function ProductManager() {
-
-    const imgPreviewRef = useRef();
+    const imgPreviewRef: MutableRefObject<HTMLImageElement | null> = useRef(null);
     const [categories, setCategories] = useState([]);
     const [pictures, setPictures] = useState<Picture[]>([]);
     const [avatarFile, setAvatarFile] = useState<File | null>(null);
@@ -29,7 +28,7 @@ export default function ProductManager() {
                 }
             })
     }, [])
-    function addNewProduct(e: FormDataEvent) {
+    function addNewProduct(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         let formData = new FormData();
         formData.append("product", JSON.stringify({
@@ -47,7 +46,7 @@ export default function ProductManager() {
             .then(res => {
                 console.log("res", res)
                 Modal.success({
-                    content: "Them san pham thanh cong"
+                    content: "Add Product sucsses"
 
                 });
             })
@@ -89,7 +88,7 @@ export default function ProductManager() {
 
                         <input type="text" placeholder="Price" name="price"></input>
 
-                        <button className="btn btn-info" type="submit">
+                        <button style={{ color: "black", backgroundColor: "black" }} className="btn btn-info" type="submit">
                             Add
                         </button>
                     </div>
@@ -104,7 +103,9 @@ export default function ProductManager() {
                                     }
                                 }
                             }} />
-                            <img src='https://content.gobsn.com/i/bodyandfit/no-xplode_Image_01?layer0=$PDP$' ref={imgPreviewRef} style={{ width: "100px", height: "100px", borderRadius: "50%", marginTop: "10px", marginBottom: "10px" }} />
+                            <img src='https://content.gobsn.com/i/bodyandfit/no-xplode_Image_01?layer0=$PDP$'
+                                ref={imgPreviewRef}
+                                style={{ width: "100px", height: "100px", borderRadius: "50%", marginTop: "10px", marginBottom: "10px" }} />
                         </div>
                         <div>
                             Pictures <br />

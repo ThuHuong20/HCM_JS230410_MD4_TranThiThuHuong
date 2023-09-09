@@ -82,7 +82,7 @@ export default function ListProduct() {
                             </td>
                             <td>{product.name}</td>
                             <td>{product.des}</td>
-                            <td>{product.price}</td>
+                            <td>${product.price}</td>
                             <td>
                                 <button
                                     type="button"

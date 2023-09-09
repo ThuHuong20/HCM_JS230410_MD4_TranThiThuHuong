@@ -2,7 +2,11 @@ import './home.scss'
 import { Outlet } from 'react-router-dom'
 import Navbar from './components/Navbars/Navbar'
 import Footer from './components/Footers/Footer'
+import { useState } from 'react';
 export default function Home() {
+
+
+
   return (
     <div className='home_page'>
       <div className='home_page_content'>

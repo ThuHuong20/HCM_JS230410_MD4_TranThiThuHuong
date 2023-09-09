@@ -15,9 +15,9 @@
 
         .detail_img_img {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-
+            gap: 15px;
 
             img {
                 width: 130px;
@@ -30,15 +30,18 @@
     .detail_content {
         margin-left: 60px;
 
-        margin-top: 50px;
+        margin-top: 10px;
 
         h1 {
             color: rgb(9, 15, 9);
+            font-weight: bold;
+            font-size: 30px;
         }
 
         .quantity-container {
             display: flex;
             justify-content: space-between;
+            margin-top: 15px;
 
             .count_product {
                 background-color: rgb(236, 77, 77);

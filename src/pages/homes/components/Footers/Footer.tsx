@@ -10,9 +10,15 @@ export default function Footer() {
                 <p>────────────────────────────────────────────────</p>
             </div>
             <div className='footer_cake'>
-                <a>{t('WholeCakes')}</a>
-                <a>{t('PreSlicedCakes')}</a>
-                <a>{t('CupCakes')}</a>
+                <a onClick={() => {
+                    window.location.href = "http://localhost:5173/categories/64f7dedda010188c5900f9a1";
+                }}>{t('WholeCakes')}</a>
+                <a onClick={() => {
+                    window.location.href = "http://localhost:5173/categories/64f7df1da761b46dc4729036";
+                }}>{t('PreSlicedCakes')}</a>
+                <a onClick={() => {
+                    window.location.href = "http://localhost:5173/categories/64f7df59efa0f2736370e7f0";
+                }}>{t('CupCakes')}</a>
             </div>
             <div className='footer_input'>
                 <input type="email" placeholder='Email' />

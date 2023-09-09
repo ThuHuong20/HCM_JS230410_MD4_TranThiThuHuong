@@ -38,17 +38,23 @@ export default function Content() {
                     <p>───</p>
                 </div>
                 <div className='container_category_img'>
-                    <div>
+                    <div onClick={() => {
+                        window.location.href = "http://localhost:5173/categories/64f7dedda010188c5900f9a1";
+                    }}>
                         <img src="../images/category1.webp" alt="" />
                         <h2>{t('WHOLE')}</h2>
                         <button>{t('BuyNow')}</button>
                     </div>
-                    <div>
+                    <div onClick={() => {
+                        window.location.href = "http://localhost:5173/categories/64f7df1da761b46dc4729036";
+                    }}>
                         <img src="../images/category2.webp" alt="" />
                         <h2>{t('PRE')}</h2>
                         <button>{t('BuyNow')}</button>
                     </div>
-                    <div>
+                    <div onClick={() => {
+                        window.location.href = "http://localhost:5173/categories/64f7df59efa0f2736370e7f0";
+                    }}>
                         <img src="../images/category3.webp" alt="" />
                         <h2>{t('CUP')}</h2>
                         <button>{t('BuyNow')}</button>
@@ -69,14 +75,18 @@ export default function Content() {
                         <div>
                             <h2>{t('FerreroRocherCake')}</h2>
                             <p>{t('text1')}</p>
-                            <button>{t('ORDERNOW')}</button>
+                            <button onClick={() => {
+                                window.location.href = 'http://localhost:5173/products/64f88c5edfff90d3da9e92c8'
+                            }}>{t('ORDERNOW')}</button>
                         </div>
                     </div>
                     <div className='container_sellers_best_two'>
                         <div>
                             <h2>{t('VanillaSpongeRasberryCake')}</h2>
                             <p>{t('text2')}</p>
-                            <button>{t('ORDERNOW')}</button>
+                            <button onClick={() => {
+                                window.location.href = 'http://localhost:5173/products/64fae683f37d03b8a92e6502'
+                            }}>{t('ORDERNOW')}</button>
                         </div>
                         <div>
                             <img style={{ marginLeft: "100px" }} src="../images/seller2.webp" alt="" />

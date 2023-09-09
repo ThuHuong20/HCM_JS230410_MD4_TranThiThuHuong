@@ -4,33 +4,7 @@ import './admin.scss'
 export default function Admin() {
     //const navigate = useNavigate();
     return (
-        // <div className='container'>
-        //     <div className='container_admin'>
-        //         <div className='container_admin_text'>
-        //             <h1>ADMIN</h1>
 
-        //             <input type="text" placeholder='Search' />
-        //         </div>
-        //         <div className='container_manager'>
-        //             <div className='container_manager_detail'>
-        //                 <ul>
-        //                     <li onClick={() => {
-        //                         navigate("productManager");
-        //                     }}>Add Products</li>
-        //                     <li onClick={() => {
-        //                         navigate("listProduct");
-        //                     }}>List Products</li>
-        //                     <li onClick={() => {
-        //                         navigate("userManager");
-        //                     }}>Customers</li>
-        //                 </ul>
-        //             </div>
-        //             <div>
-        //                 <Outlet></Outlet>
-        //             </div>
-        //         </div>
-        //     </div>
-        // </div>
         <div className='container'>
             <div className='container_title'>
                 <div className='addmin'>

@@ -1,10 +1,87 @@
 import './productDetail.scss'
 import { useTranslation } from 'react-i18next'
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import api from '@services/api'
+import Navbar from '@/pages/homes/components/Navbars/Navbar';
+interface Product {
+  id: string;
+  name: string;
+  avatar: string;
+  price: number;
+  des: string;
+  categoryId: string;
+  productPictures: {
+    id: string;
+    path: string;
+  }[]
+}
+interface CartItem {
+  productId: string;
+  quantity: number;
+}
 export default function ProductDetail() {
   const { t } = useTranslation();
+  const { id } = useParams();
+  const [product, setProduct] = useState<Product | null>(null);
+  const [quantity, setQuantity] = useState(1)
+
+
+  useEffect(() => {
+    if (id) {
+      api.productApi
+        .findProductById(id)
+        .then((res) => {
+          if (res.status == 200) {
+            setProduct(res.data.data);
+          } else {
+            alert(res.data.message);
+          }
+        })
+        .catch((err) => {
+          alert("sap server");
+        });
+    }
+  }, [id]);
+  if (!product) {
+    return null;
+  }
+
+  function handleAddToCart(productId: string, quantities: number) {
+    let carts: CartItem[] = JSON.parse(localStorage.getItem("carts") ?? "[]");
+    console.log("carts:", carts)
+
+    if (carts.length == 0) {
+      // cart rỗng
+      carts.push({
+        productId,
+        quantity: quantities
+      })
+
+    } else {
+      // cart có sp
+      let flag: boolean = false;
+      carts = carts.map(item => {
+        if (item.productId == productId) {
+          item.quantity += quantities
+          flag = true;
+        }
+        return item
+      })
+      if (!flag) {
+        carts.push({
+          productId,
+          quantity: quantities
+        })
+      }
+    }
+    localStorage.setItem("carts", JSON.stringify(carts))
+  }
+
   return (
     <div>
-      <div className="detail_container">
+
+      <div key={Date.now() * Math.random()} className="detail_container">
         <div className="detail_img">
           <img
             style={{
@@ -14,17 +91,17 @@ export default function ProductDetail() {
             }}
 
             className="productImg"
-            src='https://cakerun.com.au/wp-content/uploads/2022/09/Whole-Cake-Chocolate-Vegan-300x225.jpg'
+            src={product.avatar}
             alt=""
           />
           <div className="detail_img_img" >
-            <img src="https://cakerun.com.au/wp-content/uploads/2022/09/Whole-Cake-Chocolate-Vegan-300x225.jpg" alt="" />
-            <img src="https://cakerun.com.au/wp-content/uploads/2022/09/Whole-Cake-Chocolate-Vegan-300x225.jpg" alt="" />
-            <img src="https://cakerun.com.au/wp-content/uploads/2022/09/Whole-Cake-Chocolate-Vegan-300x225.jpg" alt="" />
+            {product.productPictures.map((item: any, index: number) => (
+              <img key={index} src={item.path} alt="" />
+            ))}
           </div>
         </div>
         <div className="detail_content">
-          <h1>hhhhhhh</h1>
+          <h1>{product.name}</h1>
 
           <div className="quantity-container">
             <span
@@ -34,22 +111,30 @@ export default function ProductDetail() {
                 fontSize: "25px",
               }}
             >
-              678888
+              ${product.price}
             </span>
             <div className="count_product">
               <button
                 className="count"
-
+                onClick={() => {
+                  if (quantity > 1) {
+                    setQuantity(quantity - 1);
+                  }
+                }}
               >
                 <span className="material-symbols-outlined">-</span>
               </button>
 
               <span className="quantity" style={{ fontSize: "25px" }}>
-                9
+                {quantity}
               </span>
               <button
                 className="count"
-
+                onClick={() => {
+                  if (quantity > 0) {
+                    setQuantity(quantity + 1);
+                  }
+                }}
               >
                 <span className="material-symbols-outlined">+</span>
               </button>
@@ -57,8 +142,10 @@ export default function ProductDetail() {
           </div>
           <div className="buttonAddCart">
             <button
-
-              type="submit"
+              onClick={() => {
+                handleAddToCart(product.id, quantity)
+              }}
+              type="button"
               className="addToCart"
             >
               {t('AddToCart')}
@@ -66,11 +153,13 @@ export default function ProductDetail() {
             <br />
             <div style={{ marginTop: "30px" }} >
               <h3>{t('Description')}</h3>
-              <div>pppppppppppppppppppppppppppppppppppppp</div>
+              <div>{product.des}</div>
             </div>
           </div>
         </div>
       </div>
+
+
       <div className="bulgari_services">
         <div>
           <h1 style={{ textAlign: "center", paddingTop: "30px" }}>

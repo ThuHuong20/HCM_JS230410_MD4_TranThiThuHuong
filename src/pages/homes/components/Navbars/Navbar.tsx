@@ -7,8 +7,11 @@ import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux';
 import { StoreType } from '../../../../stores'
 import api from '../../../../services/api'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { userAction } from '../../../../stores/slices/user';
+import { Link } from 'react-router-dom';
+
+
 export default function Navbar() {
     function changeLanguage(lang: string) {
         localStorage.setItem("locales", lang);
@@ -32,6 +35,34 @@ export default function Navbar() {
                 })
         }
     }, [])
+    const [categories, setCategories] = useState([]);
+    //console.log("🚀 ~ file: Navbar.tsx:36 ~ Navbar ~ categories:", categories)
+    useEffect(() => {
+        api.categoryApi
+            .findMany()
+            .then((res) => {
+                if (res.status == 200) {
+                    setCategories(res.data.data);
+                } else {
+                    alert(res.data.message);
+                }
+            })
+            .catch((err) => {
+                alert("sap server");
+            });
+    }, []);
+
+
+
+    const [cartTotal, setCartTotal] = useState<number | null>(null);
+    useEffect(() => {
+        const localStorageCart = JSON.parse(localStorage.getItem("carts") || "[]");
+        const total = localStorageCart.reduce((result: number, nextItem: any) => {
+            return (result += nextItem.quantity);
+        }, 0);
+        setCartTotal(total);
+    }, []);
+
     return (
         <div className='nav'>
             {/* Before Nav */}
@@ -77,7 +108,7 @@ export default function Navbar() {
                                 window.location.href = "/";
                             }}
                         >
-                            <img style={{ height: "50px" }} src="../images/logo.webp" alt="" />
+                            <img style={{ height: "50px", marginTop: "15px" }} src="../images/logo.webp" alt="" />
                         </h1>
                     </div>
                     <div className="middle_content">
@@ -88,24 +119,33 @@ export default function Navbar() {
                         >
                             {t('Home')}
                         </a>
+                        {/* {categories.map((category: any) => (
+                            <Link
+                                className="item"
+                                style={{ color: "black", textDecoration: "none" }}
+                                to={`categories/${category.id}`}
+                            >
+                                {category.title}
+                            </Link>
+                        ))} */}
                         <a
                             className="item"
                             style={{ color: "black", textDecoration: "none" }}
-                            href=""
+                            href='http://localhost:5173/categories/64f7dedda010188c5900f9a1'
                         >
                             {t('WholeCakes')}
                         </a>
                         <a
                             className="item"
                             style={{ color: "black", textDecoration: "none" }}
-                            href=""
+                            href="http://localhost:5173/categories/64f7df1da761b46dc4729036"
                         >
                             {t('PreSlicedCakes')}
                         </a>
                         <a
                             className="item"
                             style={{ color: "black", textDecoration: "none" }}
-                            href=""
+                            href="http://localhost:5173/categories/64f7df59efa0f2736370e7f0"
                         >
                             {t('CupCakes')}
                         </a>
@@ -174,7 +214,7 @@ export default function Navbar() {
                                 className="fa-solid fa-bag-shopping"
                                 style={{ cursor: "pointer" }}
                             > </i>
-                            <p style={{ color: "red" }}>0</p>
+                            <p style={{ color: "red" }}> {cartTotal != null ? cartTotal : 0}</p>
                         </div>
                         <div className="dropdown">
                             <a
