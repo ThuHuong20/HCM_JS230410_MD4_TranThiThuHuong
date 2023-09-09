@@ -10,6 +10,7 @@ const data = {
     $5DELIVERYANYWHEREINMELBOURNEMONTOSAT: "DELIVERY ANYWHERE IN MELBOURNE, MON TO SAT",
     ORDERBY5PMFORNEXTDAY: "ORDER BY 5PM FOR NEXT DAY",
     Profile: "Profile",
+    recipt: "Purchase history",
     logout: "Log 0ut",
     confirmLogout: "Are you sure want to logout?",
     eng: "English",

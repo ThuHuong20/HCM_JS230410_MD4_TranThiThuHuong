@@ -42,7 +42,30 @@ export default function Navbar() {
                 <div style={{ display: "flex" }} className='before_nav_icon'>
                     <a href="https://www.facebook.com/cakerunmelbourne"> <i style={{ marginRight: "15px" }} className="fa-brands fa-facebook-f"></i></a>
                     <a href="https://www.instagram.com/cakerunmelbourne"> <i className="fa-brands fa-instagram"></i></a>
-                    {localStorage.getItem("token") ? <p style={{ color: "white", marginLeft: "15px" }}>Hi {store.userStore.data?.userName}</p> : <></>}
+                    {localStorage.getItem("token") ?
+                        <div className="dropdown" >
+                            <button style={{ marginLeft: "15px" }}
+                                className="dropdown-toggle"
+                                // type="button"
+                                id="dropdownMenuButton"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                            >
+                                Hi {store.userStore.data?.userName}
+                            </button>
+                            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a className="dropdown-item" href="/profile">
+                                    {t('Profile')}
+                                </a>
+                                <a className="dropdown-item" href="#">
+                                    {t('recipt')}
+                                </a>
+                            </div>
+                        </div>
+                        :
+                        <></>
+                    }
                 </div>
             </div>
 
@@ -102,48 +125,23 @@ export default function Navbar() {
                             </div>
                         </div>
                         {localStorage.getItem("token") ? (
-                            <div className="dropdown">
-                                <a
-                                    id="dropdownMenuButton"
-                                    data-toggle="dropdown"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                >
-                                    <span
-                                        style={{
-                                            cursor: "pointer",
-                                        }}
-                                        className="brand_name"
-                                    >
-                                        <i className="fa-solid fa-arrow-right-from-bracket"></i>
-                                    </span>
-                                </a>
-                                <div
-                                    className="dropdown-menu"
-                                    aria-labelledby="dropdownMenuButton"
-                                >
-                                    <a className="dropdown-item" href="/profile">
-                                        {t('Profile')}
-                                    </a>
-                                    <a
-                                        //href="/"
-                                        style={{ cursor: "pointer" }}
-                                        className="dropdown-item"
-                                        onClick={() => {
-                                            //alert("Are you sure want to logout?");
-                                            Modal.confirm({
-                                                content: t('confirmLogout'),
-                                                onOk: () => {
-                                                    window.location.href = "/";
-                                                },
-                                            });
-                                            localStorage.removeItem("token");
-                                        }}
-                                    >
-                                        {t('logout')}
-                                    </a>
-                                </div>
-                            </div>
+
+                            <i
+                                className="fa-solid fa-arrow-right-from-bracket"
+                                style={{ cursor: "pointer" }}
+                                //className="dropdown-item"
+                                onClick={() => {
+                                    //alert("Are you sure want to logout?");
+                                    Modal.confirm({
+                                        content: t('confirmLogout'),
+                                        onOk: () => {
+                                            window.location.href = "/";
+                                        },
+                                    });
+                                    localStorage.removeItem("token");
+                                }}
+                            ></i>
+
                         ) : (
                             <div className="dropdown">
                                 <a

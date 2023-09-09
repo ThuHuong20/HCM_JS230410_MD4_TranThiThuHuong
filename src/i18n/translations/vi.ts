@@ -11,6 +11,7 @@ const data: I18nType = {
     $5DELIVERYANYWHEREINMELBOURNEMONTOSAT: "Giao hàng mọi nơi tại Melbourne, Thứ 2 đến Thứ 7",
     ORDERBY5PMFORNEXTDAY: "Đặt hàng trước 5 giờ chiều để nhận vào ngày hôm sau",
     Profile: "Hồ sơ",
+    recipt: "Lịch sử mua hàng",
     logout: "Đăng xuất",
     confirmLogout: "Bạn có muốn đắng xuất không?",
     eng: "Tiếng Anh",

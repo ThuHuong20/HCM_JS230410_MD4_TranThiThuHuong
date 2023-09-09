@@ -87,9 +87,9 @@ export default function Content() {
             <div className='container_insta'>
                 <div className='container_insta_icon'>
                     <div className='container_insta_text'>
-                        <p>───</p>
+                        <p>──────</p>
                         <i className="fa-brands fa-instagram"></i>
-                        <p>───</p>
+                        <p>──────</p>
                     </div>
                     <a href="">#CAKERUNMELBOURNE</a>
                     <div>{t('insta')}</div>

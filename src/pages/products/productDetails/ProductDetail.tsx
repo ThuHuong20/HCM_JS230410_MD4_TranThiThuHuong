@@ -8,14 +8,20 @@ export default function ProductDetail() {
         <div className="detail_img">
           <img
             style={{
-              width: "400px",
-              height: "400px",
+              width: "429px",
+              height: "255px",
+              position: "relative",
             }}
 
             className="productImg"
             src='https://cakerun.com.au/wp-content/uploads/2022/09/Whole-Cake-Chocolate-Vegan-300x225.jpg'
             alt=""
           />
+          <div className="detail_img_img" >
+            <img src="https://cakerun.com.au/wp-content/uploads/2022/09/Whole-Cake-Chocolate-Vegan-300x225.jpg" alt="" />
+            <img src="https://cakerun.com.au/wp-content/uploads/2022/09/Whole-Cake-Chocolate-Vegan-300x225.jpg" alt="" />
+            <img src="https://cakerun.com.au/wp-content/uploads/2022/09/Whole-Cake-Chocolate-Vegan-300x225.jpg" alt="" />
+          </div>
         </div>
         <div className="detail_content">
           <h1>hhhhhhh</h1>

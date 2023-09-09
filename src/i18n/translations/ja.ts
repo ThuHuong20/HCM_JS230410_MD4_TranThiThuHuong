@@ -11,6 +11,7 @@ const data: I18nType = {
     $5DELIVERYANYWHEREINMELBOURNEMONTOSAT: "メルボルン全域への配達、月曜から土曜日",
     ORDERBY5PMFORNEXTDAY: "翌日の配達のために5時までに注文",
     Profile: "プロフィール",
+    recipt: "購入履歴",
     logout: "ログアウト",
     confirmLogout: "ログアウトしますか？",
     eng: "英語",

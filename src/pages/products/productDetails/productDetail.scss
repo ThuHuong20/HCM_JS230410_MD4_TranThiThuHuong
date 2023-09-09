@@ -5,9 +5,25 @@
     display: flex;
 
     .detail_img {
-        img {
-            width: 300px;
-            height: 300px;
+        position: relative;
+
+        .productImg {
+            width: 429px;
+            height: 255px;
+            position: relative;
+        }
+
+        .detail_img_img {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+
+            img {
+                width: 130px;
+                height: 100px;
+                margin-top: 15px;
+            }
         }
     }
 
