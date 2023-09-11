@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react'
 import api from '@/services/api';
 import './listProduct.scss'
+import Update from './Update';
 
 
 export default function ListProduct() {
+
     const [maxItemPage, setMaxItemPage] = useState(5);
     const [skipItem, setSkipItem] = useState(0);
     const [maxPage, setMaxPage] = useState<any[]>([]);
     const [products, setProducts] = useState([]);
-    console.log("🚀 ~ file: ListProduct.tsx:18 ~ ListProduct ~ products:", products)
+    const [updateDatas, setUpdateDatas] = useState([])
+
     useEffect(() => {
         api.productApi.findMany(maxItemPage, skipItem)
             .then(res => {
@@ -54,48 +57,77 @@ export default function ListProduct() {
             <table className="table">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Avatar</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">UpDate</th>
-
+                        <th scope="col">
+                            <div className="tableContent">#</div>
+                        </th>
+                        <th scope="col">
+                            <div className="tableContent">Avatar</div>
+                        </th>
+                        <th scope="col">
+                            <div className="tableContent">Name</div>
+                        </th>
+                        <th scope="col">
+                            <div className="tableContent">Description</div>
+                        </th>
+                        <th scope="col">
+                            <div className="tableContent">Price</div>
+                        </th>
+                        <th scope="col">
+                            <div className="tableContent">UpDate</div>
+                        </th>
                     </tr>
                 </thead>
-                <tbody >
-                    {products.map((product: any, index) => (
-                        <tr
-                            key={Date.now() * Math.random()}>
-                            <th scope="row">{index + 1}</th>
-                            <td>
-                                <img
-                                    style={{
-                                        width: "180px",
-                                        height: "100px",
-                                        borderRadius: "1%",
-                                        padding: "10px"
-                                    }}
-                                    src={product.avatar}
-                                    alt=""
-                                />
+                <tbody>
+                    {products.map((product: any, index: number) => (
+                        <tr key={Date.now() * Math.random()}>
+                            <th scope="col">
+                                <div className="tableContent">{index + 1}</div>
+                            </th>
+                            <td scope="col">
+                                <div className="tableContent">
+                                    <img
+                                        style={{
+                                            width: "180px",
+                                            height: "100px",
+                                            borderRadius: "1%",
+                                            padding: "10px"
+                                        }}
+                                        src={product.avatar}
+                                        alt=""
+                                    />
+                                </div>
                             </td>
-                            <td>{product.name}</td>
-                            <td>{product.des}</td>
-                            <td>${product.price}</td>
-                            <td>
-                                <button
-                                    type="button"
-                                    className="btn btn-info"
-                                >
-                                    UpDate
-                                </button>
+                            <td scope="col">
+                                <div className="tableContent"> {product.name}</div>
+                            </td>
+                            <td scope="col">
+                                <div className="tableContent"> {product.des}</div>
+                            </td>
+                            <td scope="col">
+                                <div className="tableContent" style={{ color: "red" }}>
+                                    ${product.price}
+                                </div>
+                            </td>
+                            <td scope="col">
+                                <div className="tableContent">
+                                    <button
+                                        style={{ backgroundColor: " #3146d2" }}
+                                        type="button"
+                                        className="btn btn-info"
+                                        onClick={() => setUpdateDatas(product)}
+
+                                    >
+
+                                        <Update product={updateDatas} />
+                                    </button>
+
+                                </div>
                             </td>
                         </tr>
                     ))}
-
                 </tbody>
             </table>
+
             <div className='page_box'>
                 {
                     maxPage.map(item => {

@@ -9,7 +9,7 @@ import { StoreType } from '../../../../stores'
 import api from '../../../../services/api'
 import { useEffect, useState } from 'react';
 import { userAction } from '../../../../stores/slices/user';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 
 
 export default function Navbar() {
@@ -21,7 +21,7 @@ export default function Navbar() {
 
     const dispatch = useDispatch();
     const store = useSelector(store => store) as StoreType;
-
+    const isAdmin = store.userStore.data?.isAdmin;
 
     useEffect(() => {
         if (localStorage.getItem("token")) {
@@ -29,6 +29,7 @@ export default function Navbar() {
                 .then(res => {
                     if (res.status == 200) {
                         dispatch(userAction.setLoginData(res.data.data))
+
                     } else {
                         localStorage.removeItem("token")
                     }
@@ -36,21 +37,7 @@ export default function Navbar() {
         }
     }, [])
     const [categories, setCategories] = useState([]);
-    //console.log("🚀 ~ file: Navbar.tsx:36 ~ Navbar ~ categories:", categories)
-    useEffect(() => {
-        api.categoryApi
-            .findMany()
-            .then((res) => {
-                if (res.status == 200) {
-                    setCategories(res.data.data);
-                } else {
-                    alert(res.data.message);
-                }
-            })
-            .catch((err) => {
-                alert("sap server");
-            });
-    }, []);
+
 
 
 
@@ -89,9 +76,14 @@ export default function Navbar() {
                                 <a className="dropdown-item" href="/profile">
                                     {t('Profile')}
                                 </a>
-                                <a className="dropdown-item" href="#">
+                                <a className="dropdown-item" href="/recipt">
                                     {t('recipt')}
                                 </a>
+                                {isAdmin ? (
+                                    <a className="dropdown-item" href="/admin/productManager">
+                                        Admin
+                                    </a>
+                                ) : null}
                             </div>
                         </div>
                         :
@@ -108,7 +100,7 @@ export default function Navbar() {
                                 window.location.href = "/";
                             }}
                         >
-                            <img style={{ height: "50px", marginTop: "15px" }} src="../images/logo.webp" alt="" />
+                            <img style={{ height: "50px", marginTop: "5px" }} src="../images/logo.webp" alt="" />
                         </h1>
                     </div>
                     <div className="middle_content">
@@ -201,6 +193,9 @@ export default function Navbar() {
                                     </a>
                                     <a className="dropdown-item" href="/login">
                                         {t('login')}
+                                    </a>
+                                    <a className="dropdown-item" href="/CheckOrder">
+                                        {t('recipt')}
                                     </a>
                                 </div>
                             </div>

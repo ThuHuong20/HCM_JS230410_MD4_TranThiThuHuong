@@ -1,6 +1,9 @@
 import './cart.scss'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import api from '@services/api'
+import { Spin, Modal } from 'antd';
+import Loading from '../components/Loading';
+import { LoadingOutlined } from '@ant-design/icons';
 interface Product {
     id: string;
     name: string;
@@ -30,8 +33,21 @@ interface newGuestReceipt {
 
 }
 export default function Payment() {
+    const [load, setLoad] = useState(false);
+    const antIcon = (
+        <LoadingOutlined
+            style={{
+                fontSize: 24,
+            }}
+            spin
+        />
+    );
     const [cart, setCart] = useState<CartItemDetail[]>([]);
     console.log("cartpayment:", cart)
+    // Validation states
+    const [nameValid, setNameValid] = useState(false);
+    const [phoneNumberValid, setPhoneNumberValid] = useState(false);
+    const [emailValid, setEmailValid] = useState(false);
     useEffect(() => {
         async function formatCartPay() {
             let cartTemp: CartItemDetail[] = [];
@@ -54,24 +70,48 @@ export default function Payment() {
     const [email, setEmail] = useState('');
 
     function handleOrder() {
-        let newGuestReceipt: newGuestReceipt = {
+        // Check if all fields are valid
+        if (nameValid && phoneNumberValid && emailValid) {
+            let newGuestReceipt: newGuestReceipt = {
+                email: email,
+                phoneNumber: phoneNumber,
+                total: cart.reduce((value, cur) => {
+                    return value + cur.quantity * cur.productDetail.price;
+                }, 0),
+                payMode: "CASH",
+            };
 
-            email: email,
-            phoneNumber: phoneNumber,
+            let guestReceiptDetailList = JSON.parse(localStorage.getItem("carts") ?? "[]");
+            setLoad(true)
+            api.purchaseApi.createGuestReceipt(newGuestReceipt, guestReceiptDetailList)
+                .then(res => {
+                    console.log("res", res.data)
+                    localStorage.removeItem("carts");
 
-            total: cart.reduce((value, cur) => {
-                return value + cur.quantity * cur.productDetail.price;
-            }, 0),
-            payMode: "CASH",
+                    Modal.success({
+                        onOk: () => {
+                            window.location.href = '/';
+                        },
+                        content: "Order Success, check Receipt at Email...",
+                    });
 
+                })
+
+                .catch(err => {
+                    setLoad(false)
+                    Modal.error({
+                        content: "Order failed. Please try again later.",
+                    });
+                });
+
+            setLoad(true)
+        } else {
+            setLoad(true)
+            Modal.error({
+                content: "Please fill out all required fields correctly.",
+            });
         }
-        let guestReceiptDetailList = JSON.parse(localStorage.getItem("carts") ?? "[]")
 
-        api.purchaseApi.createGuestReceipt(newGuestReceipt, guestReceiptDetailList)
-            .then(res => {
-                console.log("res", res.data)
-                localStorage.removeItem("carts");
-            })
     }
     return (
         <div className="container-fluid">
@@ -140,7 +180,11 @@ export default function Payment() {
                                             <br />
                                         </div>
                                         <label className="pay">Name</label>
-                                        <input type="text" name="name" placeholder="Name" />
+                                        <input type="text" name="name" placeholder="Name" onChange={(e) => {
+
+                                            setNameValid(e.target.value.trim() !== ''); // Check if the name is not empty
+                                        }}
+                                            className={nameValid ? 'valid' : 'invalid'} />
                                         <div className="row">
                                             <div className="col-8 col-md-6">
                                                 <label className="pay">SDT</label>
@@ -151,7 +195,10 @@ export default function Payment() {
                                                     placeholder="0000-0000-0000-0000"
                                                     minLength={19}
                                                     maxLength={19}
-                                                    onChange={(e) => setPhoneNumber(e.target.value)}
+                                                    onChange={(e) => {
+                                                        setPhoneNumber(e.target.value);
+                                                        setPhoneNumberValid(e.target.value.trim() !== '');
+                                                    }}
                                                 />
                                             </div>
                                             <div className="col-4 col-md-6">
@@ -161,39 +208,42 @@ export default function Payment() {
                                                     name="email"
                                                     placeholder="Email"
                                                     className="placeicon"
-                                                    // minLength={3}
-                                                    // maxLength={3}
-                                                    onChange={(e) => setEmail(e.target.value)}
+                                                    onChange={(e) => {
+                                                        setEmail(e.target.value)
+                                                        setEmailValid(e.target.value.trim() !== '')
+                                                    }}
                                                 />
                                             </div>
                                         </div>
                                         <div className="row">
                                             <div className="col-md-12">
-                                                <label className="pay">Received Date</label>
+                                                <label className="pay">Address</label>
                                             </div>
                                             <div className="col-md-12">
                                                 <input
                                                     type="text"
                                                     name="exp"
                                                     id="exp"
-                                                    placeholder="MM/YY"
-                                                    minLength={5}
-                                                    maxLength={5}
+                                                    placeholder="address"
+
 
                                                 />
                                             </div>
                                         </div>
                                         <div className="row">
                                             <div className="col-md-6">
-                                                <button onClick={() => {
-                                                    handleOrder()
+                                                {
+                                                    load && <Loading />
+                                                }
+                                                <button className={`${load && ' active'} btn_submit`} style={{ backgroundColor: "black", width: "200px", height: "50px", color: "white", fontSize: "25px" }} onClick={() => {
+                                                    handleOrder();
+
                                                 }}>
-                                                    Order</button>
-                                                {/* <input
-                                                    type="submit"
-                                                    defaultValue="MAKE A PAYMENT   "
-                                                    className="btn btn-info placeicon"
-                                                /> */}
+                                                    Order
+                                                    <div className='btn_loading'>
+                                                        <Spin indicator={antIcon} />
+                                                    </div>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>

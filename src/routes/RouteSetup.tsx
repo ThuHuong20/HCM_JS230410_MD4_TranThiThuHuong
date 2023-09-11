@@ -14,6 +14,9 @@ import RouteAdmin from "./RouteAdmin";
 import Cart from "@/pages/carts/Cart";
 import Payment from "@/pages/carts/Payment";
 import Recipts from "@/pages/carts/Recipts";
+import CheckOrder from "@/pages/carts/CheckOrder";
+
+
 // import RouteAuthen from "./RouteAuthen";
 
 export default function RouteSetup() {
@@ -31,6 +34,7 @@ export default function RouteSetup() {
           <Route path="/cart" element={<Cart />}></Route>
           <Route path="/payment" element={<Payment />}></Route>
           <Route path="/recipt" element={<Recipts />}></Route>
+          <Route path="/CheckOrder" element={<CheckOrder />}></Route>
           {RouteProduct}
         </Route>
         {RouteAdmin}

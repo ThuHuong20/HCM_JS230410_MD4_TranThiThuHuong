@@ -3,7 +3,8 @@ import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from '@services/api'
-import Navbar from '@/pages/homes/components/Navbars/Navbar';
+
+import { Modal } from 'antd';
 interface Product {
   id: string;
   name: string;
@@ -57,6 +58,9 @@ export default function ProductDetail() {
         productId,
         quantity: quantities
       })
+      Modal.success(
+        { content: "Add to cart sucsses" }
+      )
 
     } else {
       // cart có sp
@@ -73,6 +77,9 @@ export default function ProductDetail() {
           productId,
           quantity: quantities
         })
+        Modal.success(
+          { content: "Add to cart sucsses" }
+        )
       }
     }
     localStorage.setItem("carts", JSON.stringify(carts))

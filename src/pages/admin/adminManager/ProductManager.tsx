@@ -1,8 +1,11 @@
 import { useEffect, useState, useRef, MutableRefObject, FormEvent } from 'react'
 import api from '@/services/api';
 import './ProductManager.scss'
-import { Modal } from 'antd';
 
+import { Spin, Modal } from 'antd';
+
+import { LoadingOutlined } from '@ant-design/icons';
+import Loading from '@/pages/components/Loading';
 interface Category {
     id: string;
     title: string;
@@ -14,6 +17,15 @@ interface Picture {
 }
 
 export default function ProductManager() {
+    const [load, setLoad] = useState(false);
+    const antIcon = (
+        <LoadingOutlined
+            style={{
+                fontSize: 24,
+            }}
+            spin
+        />
+    );
     const imgPreviewRef: MutableRefObject<HTMLImageElement | null> = useRef(null);
     const [categories, setCategories] = useState([]);
     const [pictures, setPictures] = useState<Picture[]>([]);
@@ -87,10 +99,15 @@ export default function ProductManager() {
                         <input type="text" placeholder="Des" name="des"></input>
 
                         <input type="text" placeholder="Price" name="price"></input>
-
-                        <button style={{ color: "black", backgroundColor: "black" }} className="btn btn-info" type="submit">
+                        {/* {
+                            load && <Loading />
+                        } */}
+                        <button style={{ color: "black", backgroundColor: "black" }} className={`${load && ' active'} btn_submit btn btn-info`} type="submit">
                             Add
                         </button>
+                        {/* <div className='btn_loading'>
+                            <Spin indicator={antIcon} />
+                        </div> */}
                     </div>
                     <div className="form_add_avatar">
                         <div>

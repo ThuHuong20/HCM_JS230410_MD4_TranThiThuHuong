@@ -20,5 +20,19 @@ export default {
         return await axios.get(
             `${import.meta.env.VITE_SV_HOST}/categories/` + id
         );
-    }
+    },
+    search: async function (searchString: string) {
+        return await axios.get(`${import.meta.env.VITE_SV_HOST}/products?search=${searchString}`)
+    },
+    update: async function (productId: any, formData: FormData) {
+        return await axios.patch(
+            `${import.meta.env.VITE_SV_HOST}/products/${productId}`,
+            formData,
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            },
+        );
+    },
 }

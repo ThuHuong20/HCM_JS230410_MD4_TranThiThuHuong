@@ -169,7 +169,7 @@ const Register = () => {
                 <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
                   <img
                     style={{ width: "650px", height: "450px", borderRadius: "10px" }}
-                    src="https://scontent.fsgn2-5.fna.fbcdn.net/v/t39.30808-6/313418137_118460397717241_6755371143753448203_n.jpg?stp=dst-jpg_p843x403&_nc_cat=104&ccb=1-7&_nc_sid=730e14&_nc_ohc=PaSPmlH136oAX8n_R_5&_nc_ht=scontent.fsgn2-5.fna&oh=00_AfClP3h5gZMpH0AYfEw1HwR6p-yuY0T1iTLo-P3Wl1nfXQ&oe=64EFB756"
+                    src="https://cakerun.com.au/wp-content/uploads/2022/10/Whole-Cake-Ferrero-Rocher-Cake-Melbourne-Delivery.webp"
                     className="img-fluid"
                     alt="Sample image"
                   />

@@ -2,6 +2,7 @@ import './cart.scss'
 import { useEffect, useState } from 'react'
 import api from '@services/api'
 import { Modal } from "antd";
+import { useNavigate } from 'react-router-dom';
 interface Product {
     id: string;
     name: string;
@@ -23,6 +24,7 @@ interface CartItemDetail extends CartItem {
 }
 
 export default function Cart() {
+    const navigate = useNavigate()
     const [cart, setCart] = useState<CartItemDetail[]>([]);
     console.log("cart:", cart)
     useEffect(() => {
@@ -104,7 +106,19 @@ export default function Cart() {
                                         <div className="col-md-3 col-lg-3 col-xl-2 d-flex">
                                             <button
                                                 className="btn btn-link px-2"
-                                                onClick={() => updateQuantity(item.productId, item.quantity - 1)}
+                                                onClick={() => {
+                                                    if (item.quantity > 1) {
+                                                        updateQuantity(item.productId, item.quantity - 1);
+
+                                                    } else if (item.quantity == 1) {
+                                                        Modal.warning({
+                                                            content: "Do you want to delete this product?",
+                                                            onOk: () => {
+                                                                deleteCart(item.productId)
+                                                            },
+                                                        });
+                                                    }
+                                                }}
                                             >
                                                 <i className="fas fa-minus" />
                                             </button>
@@ -147,7 +161,7 @@ export default function Cart() {
                                 </div>
                                 <button
                                     onClick={() => {
-                                        window.location.href = '/payment'
+                                        navigate('/payment')
                                     }}
                                     type="button" className="btn btn-bgr btn-warning btn-block btn-lg">
                                     Check Out

@@ -1,7 +1,9 @@
+
 import './conten.scss'
 import { useTranslation } from 'react-i18next'
 export default function Content() {
     const { t } = useTranslation();
+
     return (
         <div className='container'>
             <div className='container_header'>

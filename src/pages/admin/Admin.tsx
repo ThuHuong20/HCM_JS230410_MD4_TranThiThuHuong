@@ -1,14 +1,17 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, Link, useNavigate } from 'react-router-dom'
 import './admin.scss'
 
 export default function Admin() {
-    //const navigate = useNavigate();
+    const navigate = useNavigate()
     return (
 
         <div className='container'>
             <div className='container_title'>
-                <div className='addmin'>
+                <div style={{ display: "flex" }} className='addmin'>
                     <h1>ADMIN</h1>
+                    <h1 style={{ cursor: "pointer" }} onClick={() => {
+                        navigate('/')
+                    }}>\Home</h1>
                 </div>
                 <div className='Manager'>
                     <div className="dropdown">
@@ -23,12 +26,12 @@ export default function Admin() {
                             Product Manager
                         </button>
                         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a className="dropdown-item" href="productManager">
+                            <Link className="dropdown-item" to="productManager">
                                 Add Product
-                            </a>
-                            <a className="dropdown-item" href="listProduct">
+                            </Link>
+                            <Link className="dropdown-item" to="listProduct">
                                 List Product
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <div className="dropdown">
@@ -44,11 +47,11 @@ export default function Admin() {
                         </button>
                         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a className="dropdown-item" href="#">
-                                Action
+                                User Receipt
                             </a>
-                            <a className="dropdown-item" href="#">
-                                Another action
-                            </a>
+                            <Link className="dropdown-item" to="userManager">
+                                Guest Receipt
+                            </Link>
                         </div>
                     </div>
                 </div>
