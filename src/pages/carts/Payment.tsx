@@ -159,26 +159,27 @@ export default function Payment() {
                                         <h2 id="heading2" className="text-danger">
                                             Payment Method
                                         </h2>
-                                        <div className="radio-group">
-                                            <div className="radio" data-value="paypal">
-                                                <img style={{
-                                                    width: "100px",
-                                                    height: "47px"
-                                                }}
-                                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLvxf3SYHiCC3ypAG2ejZ7ABGlOjG3Gm58uQ&usqp=CAU"
-                                                    width="100px"
-                                                    height="10px"
-                                                />
-                                            </div>
-                                            <div className="radio" data-value="credit">
+                                        <div style={{ display: "flex", marginTop: "10px" }}>
+
+                                        </div>
+                                        <div className="radio" data-value="paypal">
+                                            <img style={{
+                                                width: "100px",
+                                                height: "47px"
+                                            }}
+                                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLvxf3SYHiCC3ypAG2ejZ7ABGlOjG3Gm58uQ&usqp=CAU"
+                                                width="100px"
+                                                height="10px"
+                                            />
+                                        </div>
+                                        {/* <div className="radio" data-value="credit">
                                                 <img
                                                     src="https://blogchiasekienthuc.com/wp-content/uploads/2019/07/su-dung-dich-vu-zalopay.png"
                                                     width="100px"
                                                     height="20px"
                                                 />
-                                            </div>
-                                            <br />
-                                        </div>
+                                            </div> */}
+                                        <br />
                                         <label className="pay">Name</label>
                                         <input type="text" name="name" placeholder="Name" onChange={(e) => {
 
